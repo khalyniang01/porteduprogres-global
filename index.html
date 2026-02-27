@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Porte du Progrès Global - Export Fruits et Légumes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --green: #28a745;
+            --orange: #fd7e14;
+            --white: #ffffff;
+            --light-green: #d4edda;
+            --dark-green: #155724;
+            --gray: #6c757d;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        header {
+            background: linear-gradient(135deg, var(--green), var(--dark-green));
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: var(--orange);
+        }
+        .lang-toggle {
+            margin-left: 2rem;
+        }
+        .lang-toggle button {
+            background: none;
+            border: 2px solid white;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .lang-toggle button.active {
+            background: var(--orange);
+            border-color: var(--orange);
+        }
+        section {
+            padding: 100px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .hero {
+            background: linear-gradient(rgba(40,167,69,0.8), rgba(24,87,36,0.8)), url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI2MDAiIHZpZXdCb3g9IjAgMCAxMjAwIDYwMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGVsbGlwc2Ugb3BhY2l0eT0iMC4zIiBjeD0iNjAwIiBjeT0iMzAwIiByeD0iNjAwIiByeT0iNDAwIiBmaWxsPSIjMjhhNzQ1Ii8+CjxwYXRoIGQ9Ik0wIDYwMFY0MDBDMCAyMDAgNDAwIDAgNjAwIDBDODAwIDAgMTIwMCAyMDAgMTIwMCA0MDBWMzYwMFoiIGZpbGw9IiMyOGE3NDUiLz4KPC9zdmc+');
+            background-size: cover;
+            color: white;
+            text-align: center;
+            padding: 150px 2rem;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .cta {
+            display: inline-block;
+            background: var(--orange);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+        .cta:hover {
+            transform: scale(1.05);
+        }
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+        }
+        .card h3 {
+            color: var(--green);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        .product-card {
+            text-align: center;
+            padding: 1.5rem;
+            border: 2px solid var(--light-green);
+            border-radius: 15px;
+            background: var(--light-green);
+        }
+        .product-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .step {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        .step-number {
+            background: var(--orange);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-weight: bold;
+        }
+        .contact-info {
+            background: var(--light-green);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        .contact-item i {
+            color: var(--green);
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
+        footer {
+            background: var(--dark-green);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+        .hidden {
+            display: none;
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+     * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+
+        .slider {
+            width: 100%;
+            max-width: 9000px;
+            height: 500px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        .slides {
+            display: flex;
+            width: 300%;
+            height: 100%;
+            animation: slide 10s infinite;
+        }
+
+        .slides img {
+            width: 100%;
+            height: 95%;
+            object-fit: cover;
+        }
+
+        @keyframes slide {
+            0% { transform: translateX(0); }
+            33% { transform: translateX(0); }
+            38% { transform: translateX(-100%); }
+            66% { transform: translateX(-100%); }
+            71% { transform: translateX(-200%); }
+            100% { transform: translateX(-200%); }
+        }
+
+        
+
+    </style>
+</head>
+<br>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="logo.jpg" alt="UCADL Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <span>Porte du Progrès Global</span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#apropos">À Propos</a></li>
+                <li><a href="#produits">Produits</a></li>
+                <li><a href="#processus">Processus</a></li>
+                <li><a href="#pourquoi">Pourquoi Nous</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="lang-toggle">
+                <button onclick="setLang('fr')" class="active">FR</button>
+                <button onclick="setLang('en')">EN</button>
+            </div>
+        </nav>
+    </header>
+   <section>
+
+</head>
+
+<body>
+
+
+    <section id="accueil" class="hero">
+        <h1 id="hero-title-fr">Porte du Progrès Global</h1>
+        <h1 id="hero-title-en" class="hidden">Porte du Progrès Global</h1>
+        <p id="hero-text-fr">Porte du Progrès Global est une entreprise sénégalaise spécialisée dans l’exportation de fruits et légumes frais. Nous travaillons en partenariat avec des producteurs locaux afin de fournir des produits de haute qualité, respectant les normes internationales, destinés aux marchés européens, maghrébins et moyen-orientaux.</p>
+        <p id="hero-text-en" class="hidden">Porte du Progrès Global is a Senegalese company specialized in the export of fresh fruits and vegetables. We work closely with local farmers to deliver high-quality products that meet international standards for European, North African, and Middle Eastern markets.</p>
+        <br>
+        <strong id="qualite-fr">Qualité – Traçabilité – Fiabilité</strong>
+        <strong id="qualite-en" class="hidden">Quality – Traceability – Reliability</strong>
+        <a href="#contact" class="cta">Contactez-nous</a>
+    </section>
+<div id="produits" class="slider">
+    <div class="title"><h3 align="center">Slide du jour</h3></div>
+    <div class="slides">
+         <img src="images/logo.jpeg" alt="Melon">
+        <img src="images/A5.jpeg" alt="Melon">
+        <img src="images/A1.jpeg" alt="Piment Vert">
+        <img src="images/A4.jpeg" alt="Courge">
+         <img src="images/A5.jpeg" alt="Melon">
+        <img src="images/A3.jpeg" alt="Piment Vert">
+        <img src="images/A4.jpeg" alt="Courge">
+        <img src="images/A6.jpeg" alt="Melon">
+        <img src="images/A7.jpeg" alt="Piment Vert">
+        <img src="images/A2.jpeg" alt="Courge">
+          <img src="images/18.jpeg" alt="Melon">
+        <img src="images/A10.jpeg" alt="Piment Vert">
+        <img src="images/A12.jpeg" alt="Courge">
+        <img src="images/14.jpeg" alt="Courge">
+          <img src="images/16.jpeg" alt="Melon">
+        <img src="images/17.jpeg" alt="Piment Vert">
+        <img src="images/A4.jpeg" alt="Courge">
+                <img src="images/A11.jpeg" alt="Melon">
+        <img src="images/A10.jpeg" alt="Piment Vert">
+    </div>
+</div>
+ <section id="produits">
+        <h2 id="produits-title-fr">Nos Produits</h2>
+        <h2 id="produits-title-en" class="hidden">Our Products</h2>
+        <p id="produits-desc-fr">Nous exportons une large gamme de fruits et légumes frais, soigneusement sélectionnés, triés et conditionnés selon les standards internationaux.</p>
+        <p id="produits-desc-en" class="hidden">We export a wide range of fresh fruits and vegetables, carefully selected, graded, and packed according to international standards.</p>
+        <div class="products">
+            <div class="product-card">
+                <div class="product-icon">🥭</div>
+                <h4>Mangue Kent</h4>
+                <p>(Produit phare) - Saison: Mai-Juin<br>Calibre: Extra, Ire classe<br>Conditionnement: Cartons 4-6kg</p>
+            </div>
+            <div class="product-card">
+                <div class="product-icon">🥬</div>
+                <h4>Haricot vert</h4>
+                <p>Saison: Toute l'année<br>Calibre: Longueur 12cm+<br>Conditionnement: Cartons 5kg</p>
+            </div>
+            <div class="product-card">
+                <div class="product-icon">🍆</div>
+                <h4>Aubergine</h4>
+                <p>Saison: Oct-Déc<br>Calibre: 200-300g<br>Conditionnement: Cartons 6kg</p>
+            </div>
+            <div class="product-card">
+                <div class="product-icon">🌶️</div>
+                <h4>Gombo</h4>
+                <p>Saison: Toute l'année<br>Calibre: 8-12cm<br>Conditionnement: Cartons 5kg</p>
+            </div>
+            <div class="product-card">
+                <div class="product-icon">🍈</div>
+                <h4>Melon</h4>
+                <p>Saison: Fév-Mai<br>Calibre: 2-4kg<br>Conditionnement: Unités</p>
+            </div>
+            <div class="product-card">
+                <div class="product-icon">🍓</div>
+                <h4>Fraise</h4>
+                <p>Saison: Nov-Mars<br>Calibre: 20-25g<br>Conditionnement: Barquettes 250g</p>
+            </div>
+            <div class="product-card">
+                <div class="product-icon">🍋</div>
+                <h4>Citron</h4>
+                <p>Saison: Toute l'année<br>Calibre: 120-180g<br>Conditionnement: Cartons 10kg</p>
+            </div>
+        </div>
+    </section>
+    <!--comment-->
+    <BLOCKQUOTE></BLOCKQUOTE>
+    <section id="apropos">
+        <h2>À Propos</h2>
+        <div class="content-grid">
+            <div class="card">
+                <h3 id="apropos-title-fr">Notre Entreprise</h3>
+                <h3 id="apropos-title-en" class="hidden">Our Company</h3>
+                <p id="apropos-text1-fr">Fondée à Thiès par Fallou Ndiaye, Porte du Progrès Global a pour objectif de valoriser les richesses agricoles du Sénégal. Statut : Entreprise individuelle (NINEA + RCCM).</p>
+                <p id="apropos-text1-en" class="hidden">Founded in Thiès by Fallou Ndiaye, Porte du Progrès Global aims to promote Senegal’s agricultural potential. Status: Individual enterprise (NINEA + RCCM).</p>
+                <p id="mission-fr">Mission: Valoriser les produits agricoles sénégalais, soutenir les producteurs locaux et fournir des produits frais de qualité internationale.</p>
+                <p id="mission-en" class="hidden">Mission: Valorize Senegalese agricultural products, support local producers and supply international quality fresh products.</p>
+            </div>
+            <div class="card">
+                <h3 id="vision-title-fr">Notre Vision</h3>
+                <h3 id="vision-title-en" class="hidden">Our Vision</h3>
+                <p id="vision-text-fr">Devenir un acteur de référence dans l’exportation horticole en Afrique de l’Ouest.</p>
+                <p id="vision-text-en" class="hidden">To become a leading horticultural export company in West Africa.</p>
+                <ul>
+                    <li>Marchés: Europe (France, Belgique, Italie), Maghreb, Moyen-Orient</li>
+                    <li>Localisation: Thiès – Sénégal</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="ucadl" style="background: var(--light-green);">
+        <h2>PORTE DU PROGRE GLOBAL – Pourquoi rejoindre notre coopérative ?</h2>
+        <div class="content-grid">
+            <div class="card">
+                <h3>Notre objectif</h3>
+                <p>Nous créons une coopérative agricole nationale pour permettre aux jeunes de toutes les régions de cultiver ensemble, d’acheter moins cher, de vendre mieux et de se former.</p>
+            </div>
+            <div class="card">
+                <h3>Avantages pour chaque membre</h3>
+                <ul>
+                    <li>Soutien mutuel : conseils et partage de techniques agricoles.</li>
+                    <li>Achats groupes : semences, engrais et matériel à prix réduits.</li>
+                    <li>Commercialisation collective : vendre ensemble pour obtenir de meilleurs prix.</li>
+                    <li>Formation et encadrement : apprendre des techniques modernes.</li>
+                    <li>Accès au financement : banques, ARM, ONG favorisent les coopératives.</li>
+                    <li>Développement national : contribuer à l’agriculture sénégalaise et à l’emploi des jeunes.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Fonctionnement simple</h3>
+                <ul>
+                    <li>Chaque membre garde sa terre.</li>
+                    <li>Les décisions se prennent ensemble lors des réunions ou en ligne.</li>
+                    <li>Petite cotisation pour le fonctionnement (entretien, logistique).</li>
+                    <li>Bureau élu pour gérer l’administration et le suivi.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Flexible et national</h3>
+                <p>Même si tu es à Thiès, tu peux collaborer avec des jeunes du Walo, Dakar, Touba, Mbour… Chacun cultive dans sa région mais bénéficie de la force du groupe.</p>
+                <a href="#contact" class="cta">Rejoins-nous !</a>
+            </div>
+        </div>
+    </section> 
+
+    <section id="processus" style="background: var(--light-green);">
+        <h2 id="processus-title-fr">Processus d’Exportation</h2>
+        <h2 id="processus-title-en" class="hidden">Export Process</h2>
+        <p id="processus-desc-fr">Notre processus garantit la qualité à chaque étape.</p>
+        <p id="processus-desc-en" class="hidden">Our export process ensures quality at every stage.</p>
+        <div class="process-steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <span>Production et collecte auprès de producteurs partenaires</span>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <span>Tri, calibrage et conditionnement</span>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <span>Contrôle qualité</span>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <span>Certification phytosanitaire</span>
+            </div>
+            <div class="step">
+                <div class="step-number">5</div>
+                <span>Transport aérien ou maritime</span>
+            </div>
+            <div class="step">
+                <div class="step-number">6</div>
+                <span>Livraison au client</span>
+            </div>
+        </div>
+        <p style="text-align: center; margin-top: 2rem; font-weight: bold;">
+            Incoterms: FOB – CIF – EXW[file:1]
+        </p>
+    </section>
+
+    <section id="pourquoi">
+        <h2 id="pourquoi-title-fr">Pourquoi Nous Choisir</h2>
+        <h2 id="pourquoi-title-en" class="hidden">Why Choose Us</h2>
+        <div class="content-grid">
+            <div class="card">
+                <ul style="list-style: none;">
+                    <li><i class="fas fa-check" style="color: var(--green); font-size: 1.2rem; margin-right: 1rem;"></i>Produits frais et traçables</li>
+                    <li><i class="fas fa-check" style="color: var(--green); font-size: 1.2rem; margin-right: 1rem;"></i>Respect des normes internationales</li>
+                    <li><i class="fas fa-check" style="color: var(--green); font-size: 1.2rem; margin-right: 1rem;"></i>Expérience en exportation</li>
+                </ul>
+            </div>
+            <div class="card">
+                <ul style="list-style: none;">
+                    <li><i class="fas fa-check" style="color: var(--green); font-size: 1.2rem; margin-right: 1rem;"></i>Relations directes avec producteurs</li>
+                    <li><i class="fas fa-check" style="color: var(--green); font-size: 1.2rem; margin-right: 1rem;"></i>Logistique maîtrisée</li>
+                    <li><i class="fas fa-check" style="color: var(--green); font-size: 1.2rem; margin-right: 1rem;"></i>Prix compétitifs</li>
+                </ul>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 2rem;">
+            <p>Clients: Importateurs, Grossistes, Supermarchés, Distributeurs, Restaurants et Hôtels</p>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>Vous êtes importateur, distributeur ou grossiste ? Contactez-nous pour une demande de devis ou un partenariat.</p>
+        <div class="contact-info">
+            <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Thiès – Sénégal</span>
+            </div>
+            <div class="contact-item">
+                <i class="fab fa-whatsapp"></i>
+                <span>+221 77 468 08 37 / +221 78 586 74 47</span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <span>468ppglobal@gmail.com</span>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 2rem;">
+            <a href="https://wa.me/221774680837" class="cta" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Porte du Progrès Global. Tous droits réservés. Thiès, Sénégal.</p>
+        <p>Rejoins la UCADL aujourd’hui, pour cultiver mieux, vendre mieux et construire ensemble l’agriculture de demain !</p>
+    </footer>
+
+    <script>
+        function setLang(lang) {
+            document.querySelectorAll('[id$="-fr"]').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('[id$="-en"]').forEach(el => el.classList.remove('hidden'));
+            document.querySelectorAll('.lang-toggle button').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            document.documentElement.lang = lang;
+            // Update titles etc.
+            if (lang === 'fr') {
+                document.querySelectorAll('h2:not([id$="-en"])').forEach(h => h.style.display = 'block');
+            } else {
+                // Simple toggle, adjust as needed
+            }
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Language toggle partial
+        document.querySelectorAll('h2[id$="-title-fr"], p[id$="-fr"]').forEach(el => {
+            el.classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>
